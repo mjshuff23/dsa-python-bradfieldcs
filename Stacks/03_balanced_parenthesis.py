@@ -16,10 +16,18 @@
 OPENING = '('
 
 def is_balanced(parenthesis):
+    """
+    Returns a boolean result as to whether a string of parenthesis is balanced
+    Press 'Q' to exit...
+    """
+
     stack = []
     for paren in parenthesis:
         if paren == OPENING:
             stack.append(paren)
+        elif paren != ')':
+            continue
+            # return 'Error: Contains characters besides parenthesis'
         else:
             try:
                 stack.pop()
@@ -27,6 +35,21 @@ def is_balanced(parenthesis):
                 return False
     return not len(stack)
 
-print(is_balanced('(())'))
-print(is_balanced('((()))'))
-print(is_balanced('((())'))
+
+print_help = input("Do you know what this function does? (Yes/No)").lower()
+if print_help.startswith('y'):
+    help(is_balanced)
+
+parenthesis = input('Enter parenthesis string to check for balance: ')
+while (not parenthesis
+       or not '(' in parenthesis
+       and not ')' in parenthesis):
+    parenthesis = input(f'Please enter a set of parenthesis: ')
+
+# print('Parenthesis Balance Tester')
+# print('-'*25, 'demo', '-'*25)
+# print('(()):', is_balanced('(())'))
+# print('((())):', is_balanced('((()))'))
+# print('((()):', is_balanced('((())'))
+# print('-'*23, 'end demo', '-'*23)
+print(f'{parenthesis}: {is_balanced(parenthesis)}')
