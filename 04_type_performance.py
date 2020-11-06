@@ -20,13 +20,7 @@
 # sort	            - O(nlog(n))
 # multiply	        - O(nk) - where k is the length of the list, must be appended k(n-1) times
 
-
-# Concatenation - O(k) where
-# Popping - O(1) when called from the end, O(n) when looking for a specific item (shifting)
-# Inserting/Deleting - O(n)
-# Iteration/In - O(n) because iterating over n things requires n steps
-# Slicing - accessing - O(k) where k is the size of the slice
-# Slicing - deleting - O(n) due to shifting
-# Multiplying - O(nk) where k is the length of the list and it must be appended k(n-1) times
-# Reversing - O(n) since we must reposition each element
-# Sorting - O(n(log(n)
+#### Dictionaries - Average Case
+#  Getting/Setting   - O(1)
+#  Contains          - O(1)
+#  Iterating/Copying - O(n) - n key/value pairs must be copied
