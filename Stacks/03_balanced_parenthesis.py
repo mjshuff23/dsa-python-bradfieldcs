@@ -36,15 +36,30 @@ def is_balanced(parenthesis):
     return not len(stack)
 
 
-print_help = input("Do you know what this function does? (Yes/No)").lower()
-if print_help.startswith('y'):
-    help(is_balanced)
+def get_input():
 
-parenthesis = input('Enter parenthesis string to check for balance: ')
-while (not parenthesis
-       or not '(' in parenthesis
-       and not ')' in parenthesis):
-    parenthesis = input(f'Please enter a set of parenthesis: ')
+    get_help(is_balanced)
+    parenthesis = input('Enter parenthesis string to check for balance: ')
+    while (not parenthesis
+        or not '(' in parenthesis
+        and not ')' in parenthesis):
+        parenthesis = input(f'Please enter a set of parenthesis: ')
+    print(f'{parenthesis}: {is_balanced(parenthesis)}')
+
+
+def get_help(topic):
+    print_help = input(
+        f"Need info on what function '{topic.__name__} 'does? (Y/N)\n").lower()
+    if print_help.startswith('y'):
+        help(topic)
+
+
+
+get_input()
+
+
+
+
 
 # print('Parenthesis Balance Tester')
 # print('-'*25, 'demo', '-'*25)
@@ -52,4 +67,3 @@ while (not parenthesis
 # print('((())):', is_balanced('((()))'))
 # print('((()):', is_balanced('((())'))
 # print('-'*23, 'end demo', '-'*23)
-print(f'{parenthesis}: {is_balanced(parenthesis)}')
