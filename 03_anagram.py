@@ -16,11 +16,24 @@ def anagram_checking_off(s1, s2):
             if char == other_char:
                 to_check_off[i] = None
                 break
+        # else clause executes after the for loop completes normally. This means that the loop did not
+        # encounter a break statement.
         else:
             return False
 
     return True
 
 
-print(anagram_checking_off('abcd', 'dcba'))
-print(anagram_checking_off('abcd', 'dcbc'))
+# print(anagram_checking_off('abcd', 'dcba'))
+# print(anagram_checking_off('abcd', 'dcbc'))
+
+# 2. Sort and Compare
+#     - use sorted to sort both and compare
+
+from itertools import izip_longest
+
+def anagram_sort_and_compare(s1, s2):
+    for a, b in izip_longest(sorted(s1), sorted(s2)):
+        if a != b:
+            return False
+    return True
