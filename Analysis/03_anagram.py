@@ -1,3 +1,6 @@
+# a word, phrase, or name formed by rearranging the letters of another,
+# such as cinema, formed from iceman.
+
 # One string is an anagram of another if the second is a rearrangement of the letters in the first.
 # heart/earth, role/lore, etc..
 #   1.  Must be same length
@@ -82,13 +85,13 @@
 #  - collections.Counter constructs a dict-like object mapping elements in an iterable to the
 #    number of occurrences of that element in the iterable.
 
-from collections import Counter
+# from collections import Counter
 
-def anagram_with_counter(s1, s2):
-    return Counter(s1) == Counter(s2)
+# def anagram_with_counter(s1, s2):
+#     return Counter(s1) == Counter(s2)
 
-print(anagram_with_counter('apple', 'pleap'))  # => True
-print(anagram_with_counter('apple', 'applf')) # => False
+# print(anagram_with_counter('apple', 'pleap'))  # => True
+# print(anagram_with_counter('apple', 'applf')) # => False
 
 # although the last solution was able to run in linear time, it only did so by using additional
 # storage for the two lists of character counts. In other words, this algorithm sacrificed space
