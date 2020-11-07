@@ -34,48 +34,50 @@
 #    4. When input is processed, check operation stack.  Any stragglers can
 #        be removed and appended to the end of the output list
 
-# PRECEDENCE = {'*': 3, '/': 3, '+': 2, '-': 2, '(': 1}
-# CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# DIGITS = '0123456789'
-# LEFT_PAREN = '('
-# RIGHT_PAREN = ')'
+import operator
+PRECEDENCE = {'*': 3, '/': 3, '+': 2, '-': 2, '(': 1}
+CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+DIGITS = set('0123456789')
+LEFT_PAREN = '('
+RIGHT_PAREN = ')'
 
 
-# def infix_to_postfix(infix_expression):
-#     operation_stack = []
-#     postfix = []
-#     tokens = infix_expression.split()
+def infix_to_postfix(infix_expression):
+    operation_stack = []
+    postfix = []
+    tokens = infix_expression.split()
 
-#     for token in tokens:
-#         if token in CHARACTERS or token in DIGITS:
-#             postfix.append(token)
-#         elif token == LEFT_PAREN:
-#             operation_stack.append(token)
-#         elif token == RIGHT_PAREN:
-#             top_token = operation_stack.pop()
-#             while top_token != LEFT_PAREN:
-#                 postfix.append(top_token)
-#                 top_token = operation_stack.pop()
-#         else:
-#             # backslash allows us to continue on next line in same statement
-#             # append higher precedence first
-#             while operation_stack and \
-#                     (PRECEDENCE[operation_stack[-1]] >= PRECEDENCE[token]):
-#                 postfix.append(operation_stack.pop())
-#             operation_stack.append(token)
-#     while operation_stack:
-#         postfix.append(operation_stack.pop())
-#     return ' '.join(postfix)
+    for token in tokens:
+        if token in CHARACTERS or token in DIGITS:
+            postfix.append(token)
+        elif token == LEFT_PAREN:
+            operation_stack.append(token)
+        elif token == RIGHT_PAREN:
+            top_token = operation_stack.pop()
+            while top_token != LEFT_PAREN:
+                postfix.append(top_token)
+                top_token = operation_stack.pop()
+        else:
+            # backslash allows us to continue on next line in same statement
+            # append higher precedence first
+            while operation_stack and \
+                    (PRECEDENCE[operation_stack[-1]] >= PRECEDENCE[token]):
+                postfix.append(operation_stack.pop())
+            operation_stack.append(token)
+    while operation_stack:
+        postfix.append(operation_stack.pop())
+    print(' '.join(postfix))
+    return ' '.join(postfix)
 
 
-# print(infix_to_postfix('A * B + C * D'))  # => 'A B * C D * +'
-# print(infix_to_postfix('( A + B ) * C - ( D - E ) * ( F + G )'))
-# # => 'A B + C * D E - F G + * -'
-# print(infix_to_postfix('( A + B ) * ( C + D )'))  # => 'A B + C D + *'
-# print(infix_to_postfix('( A + B ) * C'))  # => 'A B + C *'
-# print(infix_to_postfix('A + B * C'))  # => 'A B C * +'
+print(infix_to_postfix('A * B + C * D'))  # => 'A B * C D * +'
+print(infix_to_postfix('( A + B ) * C - ( D - E ) * ( F + G )'))
+# => 'A B + C * D E - F G + * -'
+print(infix_to_postfix('( A + B ) * ( C + D )'))  # => 'A B + C D + *'
+print(infix_to_postfix('( A + B ) * C'))  # => 'A B + C *'
+print(infix_to_postfix('A + B * C'))  # => 'A B C * +'
 
-# Postfix -> Infix Conversion
+# Evaluate Postfix
 #  Whenever an operator is seen on the input, the two most recent operands will
 #  be used in the evaluation.
 #  Consider: 4 5 6 * +:
@@ -105,7 +107,6 @@
 # standard library to specify functions that will take two arguments and return the
 # result of the proper arithmetic operation.
 
-import operator
 
 OPERATION = {
     '*': operator.mul,
@@ -113,8 +114,6 @@ OPERATION = {
     '-': operator.sub,
     '+': operator.add,
 }
-
-DIGITS = set('0123456789')
 
 
 def evaluate_postfix(postfix_expression):
@@ -132,3 +131,4 @@ def evaluate_postfix(postfix_expression):
 
 
 print(evaluate_postfix('7 8 + 3 2 + /'))  # => 3.0
+print(evaluate_postfix(infix_to_postfix('2 + ( 1 * 4 ) - 1 ')))
